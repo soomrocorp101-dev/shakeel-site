@@ -6,6 +6,13 @@ function App() {
   const [showWelcome, setShowWelcome] = useState(true);
   const [welcomeFading, setWelcomeFading] = useState(false);
   const [contentVisible, setContentVisible] = useState(false);
+  const [currentHeroImage, setCurrentHeroImage] = useState(0);
+
+  const heroImages = [
+    "/b1.png",
+    "/b2.png",
+    "/b3.png"
+  ];
 
   useEffect(() => {
     // Start content fade-in slightly after mount
@@ -18,9 +25,15 @@ function App() {
         handleSkip();
     }, 3000);
 
+    // Hero image rotation
+    const imageTimer = setInterval(() => {
+        setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+
     return () => {
         clearTimeout(contentTimer);
         clearTimeout(exitTimer);
+        clearInterval(imageTimer);
     };
   }, []);
 
@@ -117,29 +130,56 @@ function App() {
       <section id="home" className="relative pt-20 h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="w-full h-full bg-charcoal-900 relative">
-             {/* Placeholder for Macro Shot */}
-             <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 to-navy-900/90 z-10"></div>
-             <img 
-               src="https://images.unsplash.com/photo-1494412574643-35d324698422?q=80&w=2074&auto=format&fit=crop" 
-               alt="Container Terminal Model Macro Shot" 
-               className="w-full h-full object-cover opacity-40"
-             />
+             <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/50 to-navy-900/40 z-10"></div>
+             {/* Decorative Grid Overlay */}
+             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 z-10 mix-blend-overlay"></div>
+             
+             {heroImages.map((img, index) => (
+                 <img 
+                   key={index}
+                   src={img}
+                  onError={(e) => {e.target.onerror = null; e.target.src = "/workshop.png"}}
+                  alt={`Port Infrastructure ${index + 1}`}
+                   className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentHeroImage ? 'opacity-60 scale-105' : 'opacity-0 scale-100'}`}
+                 />
+             ))}
           </div>
         </div>
         
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
-            Crafting the Architecture of <br />
-            <span className="text-gold-500">Global Trade</span>
+          <div className="inline-block mb-4 px-4 py-1 border border-gold-500/30 rounded-full bg-navy-900/50 backdrop-blur-sm animate-[fadeIn_1s_ease-out]">
+            <span className="text-gold-500 text-xs md:text-sm tracking-[0.2em] uppercase font-bold">Precision Scale Models</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight leading-none text-white drop-shadow-2xl">
+            Crafting the <br />
+            <span className="relative inline-block mt-2">
+                <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 filter drop-shadow-lg">Global Trade</span>
+                <div className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent opacity-50"></div>
+            </span>
           </h1>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300">
-            Precision scale models for the maritime industry.
+          
+          <p className="mt-6 max-w-2xl mx-auto text-xl md:text-2xl text-gray-200 font-light leading-relaxed drop-shadow-md">
+            The architecture of the maritime industry, reimagined in miniature.
           </p>
-          <div className="mt-10">
-            <a href="#contact" className="inline-block bg-gold-500 text-navy-900 font-bold py-4 px-8 rounded-none hover:bg-gold-400 transition-colors duration-300 uppercase tracking-widest border border-gold-500">
-              Request Consultation
+          
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-6">
+            <a href="#contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-navy-900 transition-all duration-200 bg-gold-500 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500 hover:bg-gold-400">
+                <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
+                <span className="relative uppercase tracking-widest">Request Consultation</span>
+            </a>
+            
+            <a href="#services" className="px-8 py-4 text-base font-bold text-gold-500 transition-all duration-200 bg-transparent border border-gold-500 hover:bg-gold-500/10 uppercase tracking-widest">
+                Explore Services
             </a>
           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <div className="w-6 h-10 border-2 border-gold-500/50 rounded-full flex justify-center p-1">
+                <div className="w-1 h-2 bg-gold-500 rounded-full animate-[scroll_1.5s_infinite]"></div>
+            </div>
         </div>
       </section>
 
@@ -163,7 +203,8 @@ function App() {
                 <div className="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-gold-500"></div>
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 border-b-2 border-l-2 border-gold-500"></div>
                 <img 
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
+                    src="/workshop.png"
+                    onError={(e) => {e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"}}
                     alt="Craftsman working on a model"
                     className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
                 />
@@ -227,9 +268,24 @@ function App() {
                         focus: "Ensure every model has a professional finish and a perfect Aesthetic.",
                         image: "/daniyal-avatar.png"
                     },
-                    { name: "Bilal Hameed", title: "Electrical Lead", focus: "Lighting & Motorized Components" },
-                    { name: "Rafiq Yusuf", title: "Assembly Master", focus: "Component Integration & Rigging" },
-                    { name: "Noman Ali", title: "Detailing Artist", focus: "Miniature Props & Decals" }
+                    { 
+                        name: "Muskaan Solangi", 
+                        title: "Lead Fabrication Technician", 
+                        focus: "Responsible for the intricate assembly, pasting and making of the models.",
+                        image: "/muskaan-avatar.png"
+                    },
+                    { 
+                        name: "Asim Solangi", 
+                        title: "Quality Control Engineer", 
+                        focus: "Meticulously inspecting every detail to ensure it meets the company's standards.",
+                        image: "/asim-avatar.png"
+                    },
+                    { 
+                        name: "Habib", 
+                        title: "Procurement and Logistics Coordinator", 
+                        focus: "Managing all External Affairs and Material Sourcing.",
+                        image: "/habib-avatar.png"
+                    }
                 ].map((member, index) => (
                     <div key={index} className="bg-navy-800 border border-gold-500/30 p-6 rounded-lg w-full max-w-sm hover:border-gold-500 transition-all duration-300 flex flex-col items-center text-center group">
                         <div className="w-24 h-24 rounded-full bg-navy-900 border-2 border-gold-500 mb-4 overflow-hidden relative">
