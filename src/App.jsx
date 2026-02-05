@@ -1,12 +1,74 @@
-import React from 'react';
-import { Anchor, MapPin, Menu, X, Ship, Boxes, Building2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Anchor, MapPin, Menu, X, Ship, Boxes, Building2, ChevronRight } from 'lucide-react';
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [welcomeFading, setWelcomeFading] = useState(false);
+  const [contentVisible, setContentVisible] = useState(false);
+
+  useEffect(() => {
+    // Start content fade-in slightly after mount
+    const contentTimer = setTimeout(() => {
+        setContentVisible(true);
+    }, 500);
+
+    // Start exit animation after 2.5 seconds (allowing for reading)
+    const exitTimer = setTimeout(() => {
+        handleSkip();
+    }, 3000);
+
+    return () => {
+        clearTimeout(contentTimer);
+        clearTimeout(exitTimer);
+    };
+  }, []);
+
+  const handleSkip = () => {
+      setWelcomeFading(true);
+      setTimeout(() => {
+          setShowWelcome(false);
+      }, 1000); // Wait for slide-up transition to finish
+  };
 
   return (
-    <div className="min-h-screen bg-navy-900 text-white font-sans selection:bg-gold-500 selection:text-navy-900">
+    <div className="min-h-screen bg-navy-900 text-white font-sans selection:bg-gold-500 selection:text-navy-900 overflow-x-hidden">
       
+      {/* Welcome Overlay */}
+      {showWelcome && (
+        <div 
+            className={`fixed inset-0 z-[60] bg-navy-900 flex flex-col items-center justify-center transition-transform duration-1000 ease-in-out ${welcomeFading ? '-translate-y-full' : 'translate-y-0'}`}
+        >
+            <div className={`text-center px-6 transition-opacity duration-1000 ease-out ${contentVisible ? 'opacity-100' : 'opacity-0'}`}>
+                {/* Monogram */}
+                <div className="w-24 h-24 mx-auto mb-8 border-2 border-gold-500 flex items-center justify-center rotate-45">
+                    <div className="w-20 h-20 border border-gold-500/50 flex items-center justify-center">
+                        <span className="text-4xl font-bold text-gold-500 -rotate-45 font-serif">SE</span>
+                    </div>
+                </div>
+                
+                <h1 className="text-3xl md:text-5xl font-bold text-gold-500 mb-4 tracking-wide">
+                    Welcome to the<br/>Shakeel Enterprises<br/>Digital Portal
+                </h1>
+                
+                <div className="w-16 h-1 bg-gold-500 mx-auto mb-6"></div>
+                
+                <p className="text-gray-300 text-lg md:text-xl tracking-wider uppercase">
+                    Exploring the precision of your custom port model
+                </p>
+            </div>
+
+            {/* Skip Button */}
+            <button 
+                onClick={handleSkip}
+                className={`absolute bottom-8 right-8 text-gold-500 hover:text-white transition-colors duration-300 flex items-center space-x-2 text-sm uppercase tracking-widest ${contentVisible ? 'opacity-100' : 'opacity-0'}`}
+            >
+                <span>Skip Intro</span>
+                <ChevronRight size={16} />
+            </button>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-navy-900/90 backdrop-blur-sm border-b border-gold-500/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,6 +169,95 @@ function App() {
                 />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section id="team" className="py-20 bg-charcoal-900 border-t border-gold-500/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+                <h2 className="text-gold-500 text-lg font-bold tracking-widest uppercase mb-2">Our Team</h2>
+                <h3 className="text-3xl md:text-4xl font-bold text-white">Meet Our Visionaries</h3>
+            </div>
+            
+            {/* CEO Card */}
+            <div className="flex justify-center mb-16">
+                <div className="bg-navy-900 border-2 border-gold-500 p-8 rounded-xl w-full max-w-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col items-center text-center group relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+                    <div className="w-32 h-32 rounded-full bg-navy-800 border-4 border-gold-500 mb-6 overflow-hidden relative shadow-lg">
+                        <div className="absolute inset-0 flex items-center justify-center text-gold-500/20">
+                            <span className="text-4xl font-bold">S</span>
+                        </div>
+                        <img 
+                            src="/ceo-avatar.png" 
+                            onError={(e) => {e.target.onerror = null; e.target.src = "https://ui-avatars.com/api/?name=Shakeel+Ahmed&background=001f3f&color=D4AF37&size=128&bold=true"}}
+                            alt="Shakeel Ahmed" 
+                            className="w-full h-full object-cover rounded-full object-[50%_25%]"
+                        />
+                    </div>
+                    <h4 className="text-3xl font-bold text-white mb-2">Shakeel Ahmed</h4>
+                    <p className="text-gold-500 text-lg uppercase tracking-widest font-bold mb-4">CEO & Founder</p>
+                    <div className="h-px w-24 bg-gold-500/50 mb-4"></div>
+                    <p className="text-gray-300 text-base italic leading-relaxed">
+                        "Driving the vision of precision and excellence in every model we craft. Leading the industry with innovation and tradition."
+                    </p>
+                </div>
+            </div>
+
+            <h4 className="text-center text-xl text-gold-500/80 mb-10 font-light tracking-wide uppercase border-b border-gold-500/10 pb-4 max-w-md mx-auto">Master Craftsmen</h4>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                {[
+                    { 
+                        name: "Sami Solangi", 
+                        title: "General Operations Manager", 
+                        focus: "Oversee every stage of production to ensure the entire team stays on track.",
+                        image: "/sami-avatar.png",
+                        position: "object-top" 
+                    },
+                    { 
+                        name: "Pari Solangi", 
+                        title: "Digital System Coordinator", 
+                        focus: "Manage all Computer-Related operations and Digital workflows for the team.",
+                        image: "/pari-avatar.png"
+                    },
+                    { 
+                        name: "Daniyal Solangi", 
+                        title: "Color Expert & Surface Finish Specialist", 
+                        focus: "Ensure every model has a professional finish and a perfect Aesthetic.",
+                        image: "/daniyal-avatar.png"
+                    },
+                    { name: "Bilal Hameed", title: "Electrical Lead", focus: "Lighting & Motorized Components" },
+                    { name: "Rafiq Yusuf", title: "Assembly Master", focus: "Component Integration & Rigging" },
+                    { name: "Noman Ali", title: "Detailing Artist", focus: "Miniature Props & Decals" }
+                ].map((member, index) => (
+                    <div key={index} className="bg-navy-800 border border-gold-500/30 p-6 rounded-lg w-full max-w-sm hover:border-gold-500 transition-all duration-300 flex flex-col items-center text-center group">
+                        <div className="w-24 h-24 rounded-full bg-navy-900 border-2 border-gold-500 mb-4 overflow-hidden relative">
+                             {/* Placeholder for actual images */}
+                             <div className="absolute inset-0 flex items-center justify-center text-gold-500/20">
+                                <span className="text-2xl font-bold">{member.name.charAt(0)}</span>
+                             </div>
+                             <img 
+                                src={member.image || `https://ui-avatars.com/api/?name=${member.name.replace(' ', '+')}&background=001f3f&color=D4AF37&size=128`} 
+                                onError={(e) => {
+                                    if (member.image && e.target.src.endsWith(member.image)) {
+                                        e.target.src = `https://ui-avatars.com/api/?name=${member.name.replace(' ', '+')}&background=001f3f&color=D4AF37&size=128`;
+                                    }
+                                }}
+                                alt={member.name} 
+                                 style={{ transform: member.scale ? `scale(${member.scale})` : 'none' }}
+                                 className={`w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity ${member.position || ''}`}
+                              />
+                        </div>
+                        <h4 className="text-xl font-bold text-white mb-1">{member.name}</h4>
+                        <p className="text-gold-500 text-sm uppercase tracking-wider mb-3">{member.title}</p>
+                        <div className="h-px w-12 bg-white/10 mb-3"></div>
+                        <p className="text-gray-400 text-sm italic">
+                            "{member.focus}"
+                        </p>
+                    </div>
+                ))}
+            </div>
         </div>
       </section>
 
