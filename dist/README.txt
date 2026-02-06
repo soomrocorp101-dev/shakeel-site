@@ -1,0 +1,1 @@
+Place the ceo-avatar.png file in this directory.

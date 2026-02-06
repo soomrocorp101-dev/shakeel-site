@@ -2,7 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
     background-color: #001f3f;
     color: #ffffff;
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-navy-900/60 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+  
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* Scroll Animation Classes */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease-out;
 }
