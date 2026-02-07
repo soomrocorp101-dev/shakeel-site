@@ -37,7 +37,7 @@ const ModelCard = ({ model, index, onAddToQuote }) => {
   return (
     <div 
       className="bg-navy-900/60 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden hover:border-gold-500 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 group flex flex-col reveal-hidden"
-      style={{ transitionDelay: `${index * 100}ms` }}
+      style={{ transitionDelay: `${index * 50}ms` }}
     >
       <div className="relative h-72 overflow-hidden bg-navy-950">
         <div 
@@ -464,6 +464,55 @@ function Showcase() {
       material: "Optic-fiber lighting components, Industrial-grade Resin, 3D-printed STS cranes, and custom-cured 'Deep-Water' Acrylic base",
       image: ["/model8_1.jpeg", "/model8_2.jpeg", "/model8_3.jpeg"],
       technicalDetails: "Comprehensive terminal simulation featuring active LED navigation lighting, automated Ship-to-Shore (STS) crane systems, and a high-fidelity bulk cargo vessel moored alongside an illuminated conveyor pier."
+    },
+    {
+      name: "High-Cube Refrigerated Container (ONE Series)",
+      category: "Logistics Branding & Corporate Marketing Assets",
+      material: "Reinforced ABS Composite body, photo-etched metal detailing for the refrigeration unit, and a high-gloss polished Mahogany-finish base",
+      image: "/model9.jpeg",
+      technicalDetails: "High-fidelity scale representation of a specialized reefer unit, featuring precision-rendered ventilation grills, detailed external cooling machinery, and authentic corporate typography and branding on a polished display plinth."
+    },
+    {
+      name: "Post-Panamax Ultra-Large Container Vessel (ULCV)",
+      category: "Commercial Shipping & Corporate Fleet Displays",
+      material: "Reinforced Fiberglass Hull, Precision-Printed ABS Container Units, and CNC-machined Brass propeller and rudder assemblies",
+      image: ["/model10_1.jpeg", "/model10_2.jpeg"],
+      technicalDetails: "A high-capacity engineering model featuring a specialized bulbous bow for hydrodynamic efficiency, detailed bridge wing instrumentation, and a multi-colored, high-density container stack representing a fully utilized global logistics loadout."
+    },
+    {
+      name: "Post-Panamax High-Efficiency Container Carrier (SeaLead Series)",
+      category: "Commercial Shipping & Fleet Identity Models",
+      material: "Reinforced Resin Hull, UV-resistant Industrial Decals, and CNC-machined Brass propulsion components",
+      image: ["/model11_1.jpeg", "/model11_2.jpeg"],
+      technicalDetails: "A high-fidelity fleet model featuring the signature SeaLead maritime livery, integrated bridge-wing stabilization units, and a uniform high-cube container configuration designed to showcase maximum TEU."
+    },
+    {
+      name: "Standard Dry-Van Container (Ocean Network Express Series)",
+      category: "Corporate Branding & Logistics Assets",
+      material: "Industrial-grade ABS Composite, laser-etched metal hardware, and a high-gloss polished Mahogany-finish base",
+      image: "/model12.jpeg",
+      technicalDetails: "A high-precision scale replica featuring authentic \"ONE\" magenta corporate livery, specialized door-locking rod assemblies, detailed ISO corner castings, and accurate ventilation paneling."
+    },
+    {
+      name: "Solar-Hybrid Pure Car and Truck Carrier (M.V. EMERALD ACE)",
+      category: "Sustainable Shipping & Specialized Vehicle Logistics",
+      material: "Reinforced Fiberglass and Resin composite hull, CNC-machined solar panel simulations, and laser-etched stainless steel railings",
+      image: "/model13.jpeg",
+      technicalDetails: "A high-fidelity engineering model featuring a massive high-sided hull design, a specialized solar-array deck representation, and precision-detailed bridge and ventilation systems essential for specialized vehicle transport."
+    },
+    {
+      name: "High-Density Automated Container Terminal Model",
+      category: "Port Infrastructure & Logistics Planning",
+      material: "Laser-cut Acrylic terminal base, 3D-printed automated cranes, and high-density polymer container blocks with custom-matched industrial color palettes",
+      image: ["/model14_1.jpeg", "/model14_2.jpeg", "/model14_3.jpeg"],
+      technicalDetails: "A comprehensive yard simulation featuring twin rail-mounted gantry (RMG) cranes, detailed intermodal truck lanes with scale vehicles, administrative port buildings, and a color-coded high-cube container storage system for logistics optimization."
+    },
+    {
+      name: "Heavy-Duty Automated Twin-Lift Spreader (PICT Terminal Standard)",
+      category: "Port Infrastructure & Cargo Handling Machinery",
+      material: "CNC-machined Aluminum for the main frame, high-impact ABS for the container units, and laser-etched technical signage",
+      image: "/model15.jpeg",
+      technicalDetails: "A high-precision mechanical model representing a specialized crane spreader with dual-container interlocking capability. It features authentic PICT branding, simulated twist-lock mechanisms, and a Safe Working Load (SWL) indicator for both single (41T) and twin-lift (65T) configurations."
     }
   ];
 

@@ -13,7 +13,7 @@ export const useScrollReveal = () => {
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
+        rootMargin: '0px 0px -20px 0px',
       }
     );
 

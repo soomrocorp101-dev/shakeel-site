@@ -3,6 +3,33 @@ import { Anchor, MapPin, Menu, X, Ship, Boxes, Building2, ChevronRight, Mail, Fa
 import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 
+const heroImages = [
+  "/b1.png",
+  "/b2.png",
+  "/b3.png"
+];
+
+const featuredModels = [
+  {
+      name: "Naval Defense Class Aircraft Carrier",
+      category: "Defense & Naval Engineering",
+      image: "/model1.jpeg",
+      description: "Witness the pinnacle of precision engineering. Our naval models capture every intricate detail, from the flight deck markings to the hull plating, serving as the perfect centerpiece for defense expos and headquarters."
+  },
+  {
+      name: "Smart-Grid Integrated Port Terminal",
+      category: "Port Infrastructure",
+      image: "/model8_1.jpeg",
+      description: "Comprehensive terminal simulation featuring active LED navigation lighting, automated Ship-to-Shore (STS) crane systems, and a high-fidelity bulk cargo vessel moored alongside."
+  },
+  {
+      name: "Post-Panamax Container Carrier",
+      category: "Commercial Shipping",
+      image: "/model4.jpeg",
+      description: "High-capacity hull design featuring a full deck load of scale-accurate ISO containers with authentic shipping line branding, representing the future of global logistics."
+  }
+];
+
 function Home({ hasSeenWelcome, onWelcomeComplete }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(!hasSeenWelcome);
@@ -12,33 +39,6 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
   const [activeModelIndex, setActiveModelIndex] = useState(0);
 
   useScrollReveal();
-
-  const heroImages = [
-    "/b1.png",
-    "/b2.png",
-    "/b3.png"
-  ];
-
-  const featuredModels = [
-    {
-        name: "Naval Defense Class Aircraft Carrier",
-        category: "Defense & Naval Engineering",
-        image: "/model1.jpeg",
-        description: "Witness the pinnacle of precision engineering. Our naval models capture every intricate detail, from the flight deck markings to the hull plating, serving as the perfect centerpiece for defense expos and headquarters."
-    },
-    {
-        name: "Smart-Grid Integrated Port Terminal",
-        category: "Port Infrastructure",
-        image: "/model8_1.jpeg",
-        description: "Comprehensive terminal simulation featuring active LED navigation lighting, automated Ship-to-Shore (STS) crane systems, and a high-fidelity bulk cargo vessel moored alongside."
-    },
-    {
-        name: "Post-Panamax Container Carrier",
-        category: "Commercial Shipping",
-        image: "/model4.jpeg",
-        description: "High-capacity hull design featuring a full deck load of scale-accurate ISO containers with authentic shipping line branding, representing the future of global logistics."
-    }
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,12 +62,12 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
     // Start content fade-in slightly after mount
     const contentTimer = setTimeout(() => {
         setContentVisible(true);
-    }, 500);
+    }, 100);
 
     // Start exit animation after 2.5 seconds (allowing for reading)
     const exitTimer = setTimeout(() => {
         handleSkip();
-    }, 3000);
+    }, 2500);
 
     return () => {
         clearTimeout(contentTimer);
@@ -80,7 +80,7 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
       setTimeout(() => {
           setShowWelcome(false);
           if (onWelcomeComplete) onWelcomeComplete();
-      }, 1000); // Wait for slide-up transition to finish
+      }, 500); // Wait for slide-up transition to finish
   };
 
   return (
@@ -89,9 +89,9 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
       {/* Welcome Overlay */}
       {showWelcome && (
         <div 
-            className={`fixed inset-0 z-[60] bg-navy-900 flex flex-col items-center justify-center transition-transform duration-1000 ease-in-out ${welcomeFading ? '-translate-y-full' : 'translate-y-0'}`}
+            className={`fixed inset-0 z-[60] bg-navy-900 flex flex-col items-center justify-center transition-transform duration-500 ease-in-out ${welcomeFading ? '-translate-y-full' : 'translate-y-0'}`}
         >
-            <div className={`text-center px-6 transition-opacity duration-1000 ease-out ${contentVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`text-center px-6 transition-opacity duration-500 ease-out ${contentVisible ? 'opacity-100' : 'opacity-0'}`}>
                 {/* Monogram */}
                 <div className="w-24 h-24 mx-auto mb-8 border-2 border-gold-500 flex items-center justify-center rotate-45">
                     <div className="w-20 h-20 border border-gold-500/50 flex items-center justify-center">
@@ -182,7 +182,7 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
                    src={img}
                   onError={(e) => {e.target.onerror = null; e.target.src = "/workshop.png"}}
                   alt={`Port Infrastructure ${index + 1}`}
-                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-[2000ms] ease-in-out transform ${index === currentHeroImage ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}`}
+                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-[700ms] ease-in-out transform ${index === currentHeroImage ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}`}
                  />
              ))}
           </div>
@@ -193,7 +193,7 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
             <span className="text-gold-500 text-xs md:text-sm tracking-[0.3em] uppercase font-bold">Precision Scale Models</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight leading-none text-white drop-shadow-2xl animate-fade-in-up [animation-delay:200ms]">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight leading-none text-white drop-shadow-2xl animate-fade-in-up [animation-delay:100ms]">
             Crafting the <br />
             <span className="relative inline-block mt-2">
                 <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 filter drop-shadow-lg">Global Trade</span>
@@ -201,11 +201,11 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
             </span>
           </h1>
           
-          <p className="mt-6 max-w-2xl mx-auto text-xl md:text-2xl text-gray-200 font-light leading-relaxed drop-shadow-md animate-fade-in-up [animation-delay:400ms]">
+          <p className="mt-6 max-w-2xl mx-auto text-xl md:text-2xl text-gray-200 font-light leading-relaxed drop-shadow-md animate-fade-in-up [animation-delay:200ms]">
             The architecture of the maritime industry, reimagined in miniature.
           </p>
           
-          <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-6 animate-fade-in-up [animation-delay:600ms]">
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-6 animate-fade-in-up [animation-delay:300ms]">
             <a href="#contact" className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-navy-900 transition-all duration-300 bg-gold-500 rounded-sm font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500 hover:bg-gold-400 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                 <span className="relative uppercase tracking-widest">Request Consultation</span>
             </a>
@@ -382,7 +382,7 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
             </div>
 
             {/* Service 2 */}
-            <div className="bg-navy-800/50 backdrop-blur-sm p-8 border border-white/5 hover:border-gold-500 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] reveal-hidden [transition-delay:200ms]">
+            <div className="bg-navy-800/50 backdrop-blur-sm p-8 border border-white/5 hover:border-gold-500 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] reveal-hidden [transition-delay:100ms]">
               <Ship className="h-12 w-12 text-gold-500 mb-6 group-hover:scale-110 transition-transform duration-300" />
               <h4 className="text-xl font-bold mb-4 text-white group-hover:text-gold-400 transition-colors">Shipping Vessels</h4>
               <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
@@ -391,7 +391,7 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
             </div>
 
             {/* Service 3 */}
-            <div className="bg-navy-800/50 backdrop-blur-sm p-8 border border-white/5 hover:border-gold-500 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] reveal-hidden [transition-delay:400ms]">
+            <div className="bg-navy-800/50 backdrop-blur-sm p-8 border border-white/5 hover:border-gold-500 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)] reveal-hidden [transition-delay:200ms]">
               <Building2 className="h-12 w-12 text-gold-500 mb-6 group-hover:scale-110 transition-transform duration-300" />
               <h4 className="text-xl font-bold mb-4 text-white group-hover:text-gold-400 transition-colors">Port Infrastructure</h4>
               <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
@@ -411,7 +411,7 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
             {featuredModels.map((model, index) => (
                 <div 
                     key={index}
-                    className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center transition-opacity duration-1000 absolute inset-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${index === activeModelIndex ? 'opacity-100 z-10 relative' : 'opacity-0 z-0 absolute top-0 left-0 w-full h-full pointer-events-none'}`}
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center transition-opacity duration-500 absolute inset-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ${index === activeModelIndex ? 'opacity-100 z-10 relative' : 'opacity-0 z-0 absolute top-0 left-0 w-full h-full pointer-events-none'}`}
                 >
                     <div className="order-2 lg:order-1 reveal-hidden">
                         <div className="relative group">

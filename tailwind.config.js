@@ -31,9 +31,9 @@ export default {
       },
       animation: {
         'subtle-pulse': 'subtle-pulse 3s infinite',
-        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-        'fade-in': 'fadeIn 1s ease-out forwards',
-        'slide-up': 'slideUp 0.5s ease-out forwards',
+        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+        'fade-in': 'fadeIn 0.6s ease-out forwards',
+        'slide-up': 'slideUp 0.4s ease-out forwards',
         'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
