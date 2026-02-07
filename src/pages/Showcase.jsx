@@ -131,6 +131,39 @@ const ModelCard = ({ model, index, onAddToQuote }) => {
   );
 };
 
+const VideoShowcase = () => {
+  return (
+    <div className="mb-20 rounded-xl overflow-hidden border border-gold-500/30 shadow-2xl relative group bg-navy-950 reveal-hidden">
+      <div className="absolute inset-0 bg-navy-900/10 group-hover:bg-transparent transition-colors duration-300 pointer-events-none z-10"></div>
+      
+      {/* Decorative corners */}
+      <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-gold-500 z-20 opacity-50"></div>
+      <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-gold-500 z-20 opacity-50"></div>
+
+      <video 
+        className="w-full h-full object-cover aspect-video"
+        controls
+        muted
+        loop
+        playsInline
+        preload="metadata"
+      >
+        <source src="/modelvideo1.mp4" type="video/mp4" />
+        <source src="/modelvideo1.webm" type="video/webm" />
+        <div className="flex items-center justify-center h-full bg-navy-900 text-white p-10 text-center">
+            <p>Video playback is not supported in this browser. Please check the 'modelvideo1' file.</p>
+        </div>
+      </video>
+      
+      <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-navy-900 via-navy-900/80 to-transparent p-8 z-20 pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
+          <span className="text-gold-500 text-sm font-bold uppercase tracking-[0.2em] mb-2 block animate-pulse">Featured Presentation</span>
+          <h3 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">Cinematic Model Showcase</h3>
+          <p className="text-gray-300 mt-2 max-w-xl text-sm md:text-base">Experience the dynamic details and scale of our maritime engineering in motion.</p>
+      </div>
+    </div>
+  );
+};
+
 const CartModal = ({ isOpen, onClose, cartItems, onRemove, onProceed }) => {
   if (!isOpen) return null;
 
@@ -605,6 +638,9 @@ function Showcase() {
                 Explore our portfolio of precision-crafted maritime models. Each piece represents our dedication to accuracy and industrial artistry.
             </p>
         </div>
+
+        {/* Featured Video Section */}
+        <VideoShowcase />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {models.map((model, index) => (
