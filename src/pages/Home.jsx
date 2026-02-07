@@ -37,6 +37,7 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
   const [contentVisible, setContentVisible] = useState(false);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [activeModelIndex, setActiveModelIndex] = useState(0);
+  const [legalSection, setLegalSection] = useState(null); // 'terms' or 'privacy'
 
   useScrollReveal();
 
@@ -549,14 +550,82 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
             <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                 <p>&copy; {new Date().getFullYear()} Shakeel Enterprises. All rights reserved.</p>
                 <div className="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" className="hover:text-gold-500 transition-colors duration-300">Privacy Policy</a>
-                    <a href="#" className="hover:text-gold-500 transition-colors duration-300">Terms of Service</a>
+                    <button onClick={() => setLegalSection('privacy')} className="hover:text-gold-500 transition-colors duration-300">Privacy Policy</button>
+                    <button onClick={() => setLegalSection('terms')} className="hover:text-gold-500 transition-colors duration-300">Terms of Service</button>
                 </div>
             </div>
         </div>
       </section>
 
+      {/* Legal Modal */}
+      {legalSection && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-navy-900/90 backdrop-blur-sm transition-opacity duration-300">
+          <div className="bg-navy-900 border border-gold-500 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto relative shadow-[0_0_50px_rgba(0,0,0,0.5)] animate-fade-in-up">
+            <button 
+                onClick={() => setLegalSection(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+                <X size={24} />
+            </button>
+            
+            <div className="p-8">
+                <div className="text-center mb-8">
+                    <div className="w-12 h-1 bg-gold-500 mx-auto mb-4"></div>
+                    <h2 className="text-2xl font-bold text-white uppercase tracking-widest">
+                        {legalSection === 'terms' ? 'Terms of Services' : 'Privacy Policy'}
+                    </h2>
+                </div>
 
+                <div className="space-y-6 text-gray-300 leading-relaxed text-left">
+                    {legalSection === 'terms' ? (
+                        <>
+                            <div>
+                                <h3 className="text-gold-500 font-bold uppercase text-sm mb-2">Customization</h3>
+                                <p>All models are bespoke and manufactured based on client-provided specifications or approved CAD data.</p>
+                            </div>
+                            <div>
+                                <h3 className="text-gold-500 font-bold uppercase text-sm mb-2">Intellectual Property</h3>
+                                <p>Clients retain rights to their branding; Shakeel Enterprises retains rights to the engineering techniques used in the model construction.</p>
+                            </div>
+                            <div>
+                                <h3 className="text-gold-500 font-bold uppercase text-sm mb-2">Lead Times</h3>
+                                <p>Stated timelines are estimates. Formal project schedules will be provided upon the issuance of a Purchase Order (PO).</p>
+                            </div>
+                            <div>
+                                <h3 className="text-gold-500 font-bold uppercase text-sm mb-2">Logistics</h3>
+                                <p>International shipping is handled via specialized white-glove couriers to ensure the integrity of the model during transit.</p>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div>
+                                <h3 className="text-gold-500 font-bold uppercase text-sm mb-2">Data Collection</h3>
+                                <p>We only collect information necessary to provide a technical quotation (Company Name, Email, Project Specs).</p>
+                            </div>
+                            <div>
+                                <h3 className="text-gold-500 font-bold uppercase text-sm mb-2">No Third-Party Sharing</h3>
+                                <p>Your data is never sold or shared. It is used exclusively for communication between your firm and our engineering team.</p>
+                            </div>
+                            <div>
+                                <h3 className="text-gold-500 font-bold uppercase text-sm mb-2">Communication</h3>
+                                <p>By submitting an inquiry, you agree to be contacted via Gmail or Business Phone for the purpose of this specific project brief.</p>
+                            </div>
+                        </>
+                    )}
+                </div>
+                
+                <div className="mt-8 pt-6 border-t border-white/10 text-center">
+                    <button 
+                        onClick={() => setLegalSection(null)}
+                        className="text-gold-500 hover:text-white text-sm uppercase tracking-widest transition-colors"
+                    >
+                        Close Document
+                    </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
