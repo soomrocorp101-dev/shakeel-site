@@ -296,23 +296,23 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 {[
                     { 
-                        name: "Sami Solangi", 
-                        title: "General Operations Manager", 
-                        focus: "Oversee every stage of production to ensure the entire team stays on track.",
-                        image: "/sami-avatar.png",
-                        position: "object-top" 
-                    },
-                    { 
                         name: "Pari Solangi", 
                         title: "Digital System Coordinator", 
                         focus: "Manage all Computer-Related operations and Digital workflows for the team.",
-                        image: "/pari-avatar.png"
+                        image: "/pari-avatar.jpeg"
                     },
                     { 
                         name: "Daniyal Solangi", 
                         title: "Color Expert & Surface Finish Specialist", 
                         focus: "Ensure every model has a professional finish and a perfect Aesthetic.",
                         image: "/daniyal-avatar.png"
+                    },
+                    { 
+                        name: "Sami Solangi", 
+                        title: "General Operations Manager", 
+                        focus: "Oversee every stage of production to ensure the entire team stays on track.",
+                        image: "/sami-avatar.png",
+                        position: "object-top" 
                     },
                     { 
                         name: "Muskaan Solangi", 
