@@ -327,6 +327,12 @@ function Home({ hasSeenWelcome, onWelcomeComplete }) {
                         image: "/asim-avatar.png"
                     },
                     { 
+                        name: "Sumair Ahmed", 
+                        title: "Technical Lead & Web Developer", 
+                        focus: "Handles all technical infrastructure, website development, and digital presence optimization.",
+                        image: "/sumair-avatar.jpeg"
+                    },
+                    { 
                         name: "Habib", 
                         title: "Procurement and Logistics Coordinator", 
                         focus: "Managing all External Affairs and Material Sourcing.",
